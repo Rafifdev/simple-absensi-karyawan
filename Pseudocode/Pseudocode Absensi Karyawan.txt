@@ -1,0 +1,133 @@
+// Impor modul datetime
+IMPOR datetime
+
+// Data untuk menyimpan data karyawan
+DEKLARASI data_karyawan
+    BUAT data_karyawan nama, posisi, jam_masuk, jam_keluar
+
+FUNGSI cara_penggunaan()
+    PERULANGAN
+        CETAK "Cara Menggunakan Program"
+        CETAK "1. Pilih menu yang tersedia."
+        CETAK "2. Tambah data karyawan sebelum mencatat jam kerja."
+        CETAK "3. Catat jam masuk dan keluar sesuai kehadiran."
+        CETAK "4. Lihat laporan jam kerja karyawan."
+        CETAK "5. Pilih 'Keluar' untuk mengakhiri program."
+        
+        MASUKKAN validasi 
+        JIKA validasi == "next" MAKA
+            HENTIKAN PERULANGAN
+        LAINNYA
+            CETAK "Input salah, silakan coba lagi."
+
+FUNGSI tambah_karyawan()
+    PERULANGAN
+        MASUKKAN nama :
+        MASUKKAN posisi :
+        BUAT data baru dengan nama, posisi, jam masuk, jam keluar
+        
+        MASUKKAN validasi
+        JIKA validasi == "n" MAKA
+            HENTIKAN ULANGAN
+
+FUNGSI catat_masuk()
+    PERULANGAN
+        MASUKKAN nama :
+        
+        JIKA nama ADA DI data_karyawan MAKA
+            MASUKAN Waktu saat ini ke dalam jam_masuk sesuai dengan input nama yang ada di data_karyawan
+            CETAK "Jam masuk", nama, "tercatat pada", Waktu saat ini
+            HENTIKAN ULANGAN
+        LAINNYA
+            CETAK "Karyawan tidak ditemukan"
+            MASUKKAN validasi
+            JIKA validasi == "y" MAKA
+                HENTIKAN ULANGAN
+
+FUNGSI catat_keluar()
+    PERULANGAN
+        MASUKKAN nama :
+        
+        JIKA nama ADA DI data_karyawan MAKA
+            SET data_karyawan[nama]["jam_keluar"] = WAKTU SAAT INI ("%H:%M")
+            CETAK "Jam keluar", nama, "tercatat pada", data_karyawan[nama]["jam_keluar"]
+            HENTIKAN ULANGAN
+        LAINNYA
+            CETAK "Karyawan tidak ditemukan"
+            MASUKKAN validasi
+            JIKA validasi == "y" MAKA
+                HENTIKAN ULANGAN
+
+FUNGSI tampilkan_data()
+    CARI nama data DALAM data_karyawan
+        CETAK nama, posisi, jam_masuk, jam_keluar
+
+FUNGSI edit_data()
+    MASUKKAN nama :
+    
+    JIKA nama ADA DI data_karyawan MAKA
+        PERULANGAN
+            CETAK "1. Edit Posisi Karyawan"
+            CETAK "2. Edit Jam Masuk Karyawan"
+            CETAK "3. Edit Jam Keluar Karyawan"
+            CETAK "4. Kembali Ke Menu Utama"
+            MASUKKAN validasi
+
+            JIKA validasi == "1" MAKA
+                MASUKKAN posisi
+                UPDATE data posisi
+            LAIN JIKA validasi == "2" MAKA
+                MASUKKAN jam_masuk
+                UPDATE data jam_masukk
+            LAIN JIKA validasi == "3" MAKA
+                MASUKKAN jam_keluar
+                UPDATE data jam_masuk
+            LAIN JIKA validasi == "4" MAKA
+                HENTIKAN PERULAGAN
+
+            CETAK "Data karyawan berhasil diperbarui"
+       LAINNYA
+            CETAK "Karyawan tidak ditemukan"
+
+FUNGSI hapus_data()
+    MASUKKAN nama :
+    
+    JIKA nama ADA DI data_karyawan MAKA
+        HAPUS data semua data dengan nama inputan
+        CETAK "Data karyawan berhasil dihapus"
+    LAINNYA
+        CETAK "Karyawan tidak ditemukan"
+
+// Program utama
+PERULANGAN
+    CETAK "APLIKASI ABSENSI KARYAWAN"
+    CETAK "1. Cara menggunakan program"
+    CETAK "2. Tambah data karyawan"
+    CETAK "3. Catat jam masuk karyawan"
+    CETAK "4. Catat jam keluar karyawan"
+    CETAK "5. Edit data karyawan"
+    CETAK "6. Hapus data karyawan"
+    CETAK "7. Tampilkan data karyawan"
+    CETAK "8. Keluar"
+    
+    MASUKKAN pilihan :
+    
+    JIKA pilihan == "1" MAKA
+        PANGGIL fungsi cara_penggunaan
+    LAIN JIKA pilihan == "2" MAKA
+        PANGGIL fungsi tambah_karyawan
+    LAIN JIKA pilihan == "3" MAKA
+        PANGGIL fungsi catat_masuk
+    LAIN JIKA pilihan == "4" MAKA
+        PANGGIL fungsi catat_keluar
+    LAIN JIKA pilihan == "5" MAKA
+        PANGGIL fungsi edit_data
+    LAIN JIKA pilihan == "6" MAKA
+        PANGGIL fungsi hapus_data
+    LAIN JIKA pilihan == "7" MAKA
+        PANGGIL fungsi tampilkan_data
+    LAIN JIKA pilihan == "8" MAKA
+        CETAK "Terima kasih! Program selesai"
+        HENTIKAN ULANGAN
+    LAINNYA
+        CETAK "Pilihan tidak valid, silakan coba lagi"
